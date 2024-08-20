@@ -23,9 +23,10 @@
 
 
 <label for="pass">Pass</label>
-    <input type="text" name="pass" id="pass">
+    <input type="password" name="pass" id="pass">
 
-<input type="submit" value="Cargar">
+<input type="submit" value="Cargar" name="envio">
+<input type="reset" value="Cancelar">
 <script src="app.js"></script>
 </form>
 </body>
