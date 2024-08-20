@@ -18,6 +18,8 @@ function validar_campos(evento) {
     for (let campo in datos) {
         //compruebo si los campos estan vacíos, además recorto los espacios con trim
         if (datos[campo].value.trim() === '') {
+
+            //pueden generar un mensaje creando un elmento de html y darle tiempo con setTimeOut para que desaparezca...
             alert("Todos los campos son obligatorios");
             es_valido = false;
             break;

@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
     
 <form action="POST" method="POST">
 
-<label for="nombre"></label>
+<label for="nombre">Nombre</label>
     <input type="text" name="nombre" id="nombre">
 
 
-<label for="apellido"></label>
+<label for="apellido">Apellido</label>
     <input type="text" name="apellido" id="apellido">
 
 
-<label for="email"></label>
+<label for="email">Email</label>
     <input type="text" name="email" id="email">
 
 
-<label for="pass"></label>
+<label for="pass">Pass</label>
     <input type="text" name="pass" id="pass">
 
 <input type="submit" value="Cargar">
