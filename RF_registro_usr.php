@@ -7,7 +7,7 @@ $con = conectar_bd();
 // Comprobar que se envió un formulario por POST desde carga_datos
 if (isset($_POST["envio"])) {
 
-    $nombre = $_POST["nombre"];
+    $nombre =  $_POST["nombre"];
     $apellido = $_POST["apellido"];
     $email = $_POST["email"];
     $contrasenia = $_POST["pass"];
@@ -17,11 +17,12 @@ if (isset($_POST["envio"])) {
 
     // Insertar datos si el usuario no existe
     insertar_datos($con, $nombre, $apellido, $email, $contrasenia, $existe_usr);
+
 }
 
 function consultar_existe_usr($con, $email) {
 
-    $email = mysqli_real_escape_string($con, $email); // Escapar los campos  para evitar inyección SQL
+    $email = mysqli_real_escape_string($con, $email); // Escapar los campos para evitar inyección SQL
     $consulta_existe_usr = "SELECT email FROM usuarios WHERE email = '$email'";
     $resultado_existe_usr = mysqli_query($con, $consulta_existe_usr);
 
@@ -37,7 +38,9 @@ function insertar_datos($con, $nombre, $apellido, $email, $contrasenia, $existe_
     if ($existe_usr == false) {
         $nombreCompleto = $nombre . ' ' . $apellido;
         $email = mysqli_real_escape_string($con, $email);
-        $contrasenia = mysqli_real_escape_string($con, $contrasenia);
+
+        // Encripto la controaseña usando la función password_hash
+        $contrasenia = password_hash($contrasenia, PASSWORD_DEFAULT);
 
         $consulta_insertar = "INSERT INTO usuarios (nombrecompleto, email, pass) VALUES ('$nombreCompleto', '$email', '$contrasenia')";
 
@@ -59,7 +62,7 @@ function consultar_datos($con) {
     // Inicializo una variable para guardar los resultados
     $salida = "";
 
-    // Si se recupera algún registro de la consulta
+    // Si se encuentra algún registro de la consulta
     if (mysqli_num_rows($resultado) > 0) {
         // Mientras haya registros
         while ($fila = mysqli_fetch_assoc($resultado)) {

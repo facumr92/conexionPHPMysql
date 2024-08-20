@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
-</head>
-<body>
-    
-<form action="RF.php" method="POST">
+
+<?php require("header.php")?>
+
+
+<form action="RF_registro_usr.php" method="POST">
 
 <label for="nombre">Nombre</label>
     <input type="text" name="nombre" id="nombre">
@@ -29,5 +23,5 @@
 <input type="reset" value="Cancelar">
 <script src="app.js"></script>
 </form>
-</body>
-</html>
+
+<?php require ("footer.php"); ?>
