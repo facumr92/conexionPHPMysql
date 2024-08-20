@@ -8,7 +8,7 @@
 </head>
 <body>
     
-<form action="POST" method="POST">
+<form action="RF.php" method="POST">
 
 <label for="nombre">Nombre</label>
     <input type="text" name="nombre" id="nombre">
