@@ -11,7 +11,7 @@ if (isset($_POST["envio"])) {
     logear($con, $email, $contrasenia);
 }
 
-function logear($con, $email, $pass) {
+function logear($con, $email, $contrasenia  ) {
 
     session_start();
 
@@ -27,7 +27,7 @@ function logear($con, $email, $pass) {
         $password_bd = $fila["pass"];
 
         //uso la funcion password_verify para comparar lo que ingresa el usuario con lo que tengo en la BD.
-        if (password_verify($pass, $password_bd)) {
+        if (password_verify($contrasenia, $password_bd)) {
             
             //si todo es correcto inicio la sesion y redirijo a la pagina del usuario logueado
             $_SESSION["email"] = $email;
@@ -38,6 +38,3 @@ function logear($con, $email, $pass) {
         }
     }
 }
-
-
-?>

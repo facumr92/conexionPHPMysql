@@ -1,33 +1,45 @@
-//selecciono el formulario que tiene los datos a enviar
-const formulario = document.querySelector('form');
+const formularioBusqueda = document.getElementById("form-buscar-usuario");
+const resultadoDiv = document.getElementById('resultado');
 
-// Usando selectores para los inputs
-const input_nombre = document.querySelector("#nombre");
-const input_apellido = document.getElementById("apellido");
-const input_email = document.getElementById("email");
-const input_pass = document.getElementById("pass");
+formularioBusqueda.addEventListener("submit", consultar_en_tiempo_real);
 
-const datos = { input_nombre, input_apellido, input_email, input_pass };
+function consultar_en_tiempo_real(evento) {
+    
+    // Evita que se recargue la página
+    evento.preventDefault();
 
-formulario.addEventListener("submit", validar_campos);
+    // Obtener el ultimo valor del input
+    const nombre_usuario = document.getElementById("usuario").value;
 
-function validar_campos(evento) {
-    let es_valido = true;
+    //se crea un objeto para tomar los valores del formulario
+    const formData = new FormData();
+    formData.append('usuario', nombre_usuario);
+    formData.append('envio', true);
 
-    // recorro el array datos que tiene todos los inputs
-    for (let campo in datos) {
-        //compruebo si los campos estan vacíos, además recorto los espacios con trim
-        if (datos[campo].value.trim() === '') {
+    // se le pasa al fetch el endpoint que genera la consulta de busqueda
+    fetch('RF_buscar_user.php', {
+        method: 'POST',
+        body: formData
+    })
 
-            //pueden generar un mensaje creando un elmento de html y darle tiempo con setTimeOut para que desaparezca...
-            alert("Todos los campos son obligatorios");
-            es_valido = false;
-            break;
+    //se toma la respuesta y se devuelve en formato json
+    .then(response => response.json())
+    //la variable data se usa para recorrer el array asociativo del endpoint...
+    .then(data => {
+        
+        resultadoDiv.innerHTML = ''; // Limpia el contenido previo
+
+        //si el enpoint devuelve 1...
+        if (data.status === 1) {
+            data.usuarios.forEach(user => {
+                // se agrega html dentro del div que contiene el mensaje de respuesta
+                resultadoDiv.innerHTML += `<p>ID: ${user.id} - Nombre: ${user.nombre} - Email: ${user.email}</p><hr>`;
+            });
+        } else {
+            resultadoDiv.innerHTML = `<p>${data.mensaje}</p>`;
         }
-    }
-
-    // Si no es válido, prevenir el envío del formulario con preventDefault()
-    if (!es_valido) {
-        evento.preventDefault();
-    }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }

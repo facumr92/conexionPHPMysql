@@ -1,7 +1,7 @@
 <?php require("header.php"); ?>
 
 
-    <form action="RF_login_usr.php" method="POST">
+    <form action="RF_login_usr.php" method="POST" id="login_form" >
 
 
     <label for="email">Email</label>
@@ -13,6 +13,7 @@
 
     <input type="submit" value="Ingresar" name="envio">
     <input type="reset" value="Cancelar">
+
 
     <script src="app.js"></script>
     </form>
