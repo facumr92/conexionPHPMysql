@@ -12,7 +12,7 @@ if (isset($_POST["envio"])) {
 }
 
 
-
+//creo una funcion para traer todos los datos del usuario logueado y asi podes mostrarlos en su home 
 function traer_datos_usuario($con, $email){
 
 
