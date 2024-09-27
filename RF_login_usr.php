@@ -11,7 +11,35 @@ if (isset($_POST["envio"])) {
     logear($con, $email, $contrasenia);
 }
 
+
+
+function traer_datos_usuario($con, $email){
+
+
+    $sql = "SELECT * FROM usuarios WHERE email = '$email'";
+    $resultado = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($resultado);
+    if(mysqli_num_rows($resultado)>0){
+        return [
+
+            'id' => $row['id_user'],
+            'nombre' => $row['nombrecompleto'],
+            'email' => $row['email'],
+            'contrasenia' => $row['pass']
+        ];
+
+     } else{
+
+            return null;
+    }
+    
+
+}
+
+
 function logear($con, $email, $contrasenia  ) {
+
+    $datos_usr= traer_datos_usuario($con, $email);  
 
     session_start();
 
@@ -31,6 +59,8 @@ function logear($con, $email, $contrasenia  ) {
             
             //si todo es correcto inicio la sesion y redirijo a la pagina del usuario logueado
             $_SESSION["email"] = $email;
+            $_SESSION["usuario"]= $datos_usr['nombre'];
+            
             header("Location: home_usuario.php");
             exit();
         } else {

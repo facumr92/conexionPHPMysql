@@ -1,9 +1,11 @@
+
+
 const formularioBusqueda = document.getElementById("form-buscar-usuario");
 const resultadoDiv = document.getElementById('resultado');
 
-formularioBusqueda.addEventListener("submit", consultar_en_tiempo_real);
+formularioBusqueda.addEventListener("submit", buscar_usr_en_tiempo_real);
 
-function consultar_en_tiempo_real(evento) {
+function buscar_usr_en_tiempo_real(evento) {
     
     // Evita que se recargue la página
     evento.preventDefault();

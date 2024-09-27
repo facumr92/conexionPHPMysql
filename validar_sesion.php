@@ -5,4 +5,7 @@ if (!isset($_SESSION['email'])) {
     exit();
 } else {
     $email = $_SESSION["email"];
+    $usr= $_SESSION["usuario"];
+
+
 }

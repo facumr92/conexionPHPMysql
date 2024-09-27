@@ -17,5 +17,3 @@
 
     <script src="app.js"></script>
     </form>
-
-<?php require("footer.php"); ?>

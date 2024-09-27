@@ -23,7 +23,6 @@ if (isset($_POST["envio"])) {
 function buscar_user($con, $nombre) {
     // Array para almacenar la respuesta
     $respuesta_json = array();
-    $usuarios = array();
 
     // Sanitizar el nombre para evitar inyecciones SQL
     $nombre = mysqli_real_escape_string($con, $nombre);
@@ -35,7 +34,7 @@ function buscar_user($con, $nombre) {
     if (mysqli_num_rows($resultado_buscar_user) > 0) {
         while ($fila = mysqli_fetch_assoc($resultado_buscar_user)) {
 
-            // Agregar cada usuario encontrado al array
+            // Agregar cada usuario encontrado a un array de usuarios
             $usuario[] = array(
                 "id" => $fila["id_user"],
                 "nombre" => $fila["nombrecompleto"],
